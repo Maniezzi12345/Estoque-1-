@@ -31,4 +31,8 @@ busca = Buscar_produto_por_nome()
         else:
                 print("Produto não encontrado no estoque")
 
+
+inicio = Conectar_banco()
+busca = Buscar_produto_por_nome()
+    
               
