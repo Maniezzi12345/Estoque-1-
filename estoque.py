@@ -24,7 +24,9 @@ def Buscar_produto_por_nome():
                                     Nome: {nome}
                                     Quantidade:{quantidade}
                                     Preço: {preco}""")
-                    
+inicio = Conectar_banco()
+busca = Buscar_produto_por_nome()
+    
         
         else:
                 print("Produto não encontrado no estoque")
