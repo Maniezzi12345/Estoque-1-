@@ -1,37 +1,32 @@
 import mysql.connector
-
-def buscar_produto_por_nome(nome_produto):
-    # banco de dados fictício
-    cnx = mysql.connector.connect(
+def Conectar_banco():
+        return mysql.connector.connect(  
         host="localhost",
-        user="git",
-        password="****",
+        user="github",
+        password="$$$$",
         database="loja"
     )
-    
-    cursor = cnx.cursor()
-    consulta_sgbd = "SELECT * FROM produtos WHERE LOWER(nome) = LOWER(%s)"
-    cursor.execute(consulta_sgbd, (nome_produto,))
-    
 
-    resultado = cursor.fetchall()
+def Buscar_produto_por_nome():
+        
+        cnx = Conectar_banco()
+        cursor = cnx.cursor()
+        nome_produto = input("Digite o nome do produto:").strip()
+        consultar_sgbd = "SELECT * FROM produtos WHERE LOWER(nome) = LOWER(%s)"
+        cursor.execute(consultar_sgbd, (nome_produto,))
+        resultado = cursor.fetchall()
+        
+        if resultado:
+                for linha in resultado:
+                        id_produto, nome, quantidade, preco = linha 
+                        print(f"""O Produto possui as seguintes características:
+                                    Id : {id_produto}
+                                    Nome: {nome}
+                                    Quantidade:{quantidade}
+                                    Preço: {preco}""")
+                    
+        
+        else:
+                print("Produto não encontrado no estoque")
 
-
-    if resultado:
-        for linha in resultado:
-            id_produto,nome,quantidade,preco = linha 
-            print(f"Id: {id_produto}")
-            print(f"Nome: {nome}")
-            print(f"Quantidade: {quantidade}")
-            print(f"Preço: {preco}")
-
-    else:
-        print("Produto não encontrado")
-    
-
-    cursor.close()
-    cnx.close()
-
-
-nome_produto = input("Digite o nome do produto: ").strip()
-buscar_produto_por_nome(nome_produto)
+              
